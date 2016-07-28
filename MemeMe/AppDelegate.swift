@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  MemeMe
+//  imagePickerPractice
 //
-//  Created by Joel on 7/19/16.
-//  Copyright © 2016 Joel Pratt. All rights reserved.
+//  Created by Joel on 4/9/16.
+//  Copyright © 2016 Joel. All rights reserved.
 //
 
 import UIKit
