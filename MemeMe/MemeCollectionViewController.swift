@@ -27,8 +27,7 @@ class MemeCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("MemeCollectionViewCell", forIndexPath: indexPath) as! MemeCollectonViewCell
         
         let meme = memes[indexPath.row]
-        cell.cellImage.image = meme.image
-        cell.setLabel(meme.memeTopText!, bottomString: meme.memeBottomText!)
+        cell.cellImage.image = meme.memedImage
         
         return cell
     }
@@ -76,10 +75,11 @@ class MemeCollectionViewController: UICollectionViewController {
     // MARK: - FlowLayout
     
     func flowLayoutSetup(space: CGFloat, height: CGFloat, width: CGFloat, size: CGFloat) {
-        var divisor: CGFloat = 4.0
+        var divisor: CGFloat = 3.0
         
         while Int(height) % Int(divisor) != 0 && Int(width) % Int(divisor) != 0 {
             divisor += 0.1
+            print(divisor)
         }
         let dimension = (( size - (2.0 * space)) / divisor)
         flowLayout.minimumLineSpacing = space

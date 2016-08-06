@@ -129,39 +129,21 @@
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xJp-OE-b3x">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xJp-OE-b3x">
                                             <rect key="frame" x="8" y="8" width="84" height="84"/>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqo-qB-0lM">
-                                            <rect key="frame" x="35" y="8" width="31" height="15"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Med-qb-wVy">
-                                            <rect key="frame" x="35" y="77" width="31" height="15"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="Med-qb-wVy" firstAttribute="bottom" secondItem="PVT-V5-F2e" secondAttribute="bottomMargin" id="09V-MB-IMu"/>
-                                    <constraint firstItem="Med-qb-wVy" firstAttribute="centerX" secondItem="PVT-V5-F2e" secondAttribute="centerX" id="5GH-Sh-Go5"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="xJp-OE-b3x" secondAttribute="trailing" id="E1g-S5-PD1"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="xJp-OE-b3x" secondAttribute="bottom" id="Kp2-dx-ow3"/>
-                                    <constraint firstItem="nqo-qB-0lM" firstAttribute="centerX" secondItem="PVT-V5-F2e" secondAttribute="centerX" id="Kvl-4D-BxD"/>
-                                    <constraint firstItem="nqo-qB-0lM" firstAttribute="top" secondItem="PVT-V5-F2e" secondAttribute="topMargin" id="TMS-MU-Zcw"/>
                                     <constraint firstItem="xJp-OE-b3x" firstAttribute="leading" secondItem="PVT-V5-F2e" secondAttribute="leadingMargin" id="kge-Yf-OiF"/>
                                     <constraint firstItem="xJp-OE-b3x" firstAttribute="top" secondItem="PVT-V5-F2e" secondAttribute="topMargin" id="uiL-s2-gZN"/>
                                 </constraints>
                                 <size key="customSize" width="100" height="100"/>
                                 <connections>
-                                    <outlet property="bottomLabel" destination="Med-qb-wVy" id="tvl-iZ-WBa"/>
                                     <outlet property="cellImage" destination="xJp-OE-b3x" id="Cdg-Pp-FXA"/>
-                                    <outlet property="topLabel" destination="nqo-qB-0lM" id="32z-JY-tai"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
