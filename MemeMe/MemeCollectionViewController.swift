@@ -45,23 +45,6 @@ class MemeCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         
-        let screenHeight = view.frame.size.height
-        let screenWidth = view.frame.size.width
-        let spacePortrait: CGFloat = 1.0
-        let spaceLandscape: CGFloat = 1.0
-        
-        print(screenHeight)
-        print(screenWidth)
-        
-        
-        if screenHeight > screenWidth {
-            flowLayoutSetup(spacePortrait, height: screenHeight, width: screenWidth, size: screenWidth)
-        }
-        else {
-            flowLayoutSetup(spaceLandscape, height: screenHeight, width: screenWidth, size: screenHeight)
-        }
-        
-        
        
     }
     
@@ -72,16 +55,30 @@ class MemeCollectionViewController: UICollectionViewController {
         
     }
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        let screenHeight = view.frame.size.height
+        let screenWidth = view.frame.size.width
+        let space: CGFloat = 1.0
+       
+        
+        
+        if screenHeight > screenWidth {
+            flowLayoutSetup(space, height: screenHeight, width: screenWidth, size: screenWidth)
+        }
+        else {
+            flowLayoutSetup(space, height: screenHeight, width: screenWidth, size: screenHeight)
+        }
+        
+    }
+    
     // MARK: - FlowLayout
     
     func flowLayoutSetup(space: CGFloat, height: CGFloat, width: CGFloat, size: CGFloat) {
-        var divisor: CGFloat = 3.0
-        
-        while Int(height) % Int(divisor) != 0 && Int(width) % Int(divisor) != 0 {
-            divisor += 0.1
-            print(divisor)
-        }
+        let divisor: CGFloat = 3.0
         let dimension = (( size - (2.0 * space)) / divisor)
+        
         flowLayout.minimumLineSpacing = space
         flowLayout.minimumInteritemSpacing = space
         flowLayout.itemSize = CGSizeMake(dimension, dimension)
