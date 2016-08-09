@@ -41,13 +41,6 @@ class MemeCollectionViewController: UICollectionViewController {
     
     // MARK: - View Life Cycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-       
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -61,8 +54,6 @@ class MemeCollectionViewController: UICollectionViewController {
         let screenHeight = view.frame.size.height
         let screenWidth = view.frame.size.width
         let space: CGFloat = 1.0
-       
-        
         
         if screenHeight > screenWidth {
             flowLayoutSetup(space, height: screenHeight, width: screenWidth, size: screenWidth)
