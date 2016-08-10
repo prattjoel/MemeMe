@@ -9,28 +9,25 @@
         <!--Sent Memes-->
         <scene sceneID="8Ca-7f-sv3">
             <objects>
-                <tableViewController id="RZD-gy-yMB" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="170" sectionHeaderHeight="28" sectionFooterHeight="28" id="HCJ-WK-MZn">
+                <tableViewController storyboardIdentifier="MemeTableViewController" id="RZD-gy-yMB" customClass="MemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="HCJ-WK-MZn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" textLabel="atO-6x-mHB" rowHeight="170" style="IBUITableViewCellStyleDefault" id="ahw-d0-yhG" customClass="SentMemesTableViewCell" customModule="MemeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="170"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" textLabel="3sd-6L-sgV" rowHeight="50" style="IBUITableViewCellStyleDefault" id="ahw-d0-yhG" customClass="SentMemesTableViewCell" customModule="MemeMe" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ahw-d0-yhG" id="qhx-Xt-Mli">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="169"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="atO-6x-mHB">
-                                            <rect key="frame" x="15" y="0.0" width="570" height="169"/>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sd-6L-sgV">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="49"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact">
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -43,6 +40,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sent Memes" id="y9u-2K-Yav">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="8ed-WH-ML4">
+                            <connections>
+                                <action selector="deleteButton:" destination="RZD-gy-yMB" id="CA4-Ft-0pX"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HOj-Eu-h48">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="presentation" identifier="ShowMemeEditor" id="h3u-N1-XRE"/>
@@ -171,7 +173,7 @@
         <!--Meme EditorVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MemeEditorVC" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditorVC" id="BYZ-38-t0r" customClass="MemeEditorVC" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -181,7 +183,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F05-yR-fuZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="620"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LAp-uY-6dL">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
@@ -249,22 +251,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="9c1-ys-LRv" firstAttribute="top" secondItem="LAp-uY-6dL" secondAttribute="bottom" id="0fX-k1-7tS"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="F05-yR-fuZ" secondAttribute="bottom" id="34b-zt-KDP"/>
                             <constraint firstItem="9c1-ys-LRv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="38u-5U-PCV"/>
                             <constraint firstItem="EtU-rs-1Df" firstAttribute="top" secondItem="631-Mn-5yR" secondAttribute="bottom" id="43C-G0-obg"/>
                             <constraint firstItem="LAp-uY-6dL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Any-Kx-NBs"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="F05-yR-fuZ" secondAttribute="bottom" constant="-20" id="G0w-nb-hac"/>
+                            <constraint firstItem="F05-yR-fuZ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="NwZ-bd-h8C"/>
+                            <constraint firstItem="F05-yR-fuZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="RD1-i5-h0F"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9c1-ys-LRv" secondAttribute="trailing" id="REA-Gw-vQf"/>
                             <constraint firstItem="LAp-uY-6dL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="RH8-bu-vIZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="F05-yR-fuZ" secondAttribute="trailing" constant="-20" id="XoL-1V-YTV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="F05-yR-fuZ" secondAttribute="trailing" constant="-20" id="UES-9T-3N3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EtU-rs-1Df" secondAttribute="trailing" constant="-20" id="XsI-cy-8us"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EtU-rs-1Df" secondAttribute="bottom" id="Ydg-hl-8sI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LAp-uY-6dL" secondAttribute="trailing" constant="-20" id="bTD-yc-TOw"/>
                             <constraint firstItem="EtU-rs-1Df" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="dnx-RN-AV8"/>
                             <constraint firstItem="HkM-FC-MRU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="f8g-L3-ezL"/>
-                            <constraint firstItem="F05-yR-fuZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="gAx-XP-PFL"/>
                             <constraint firstItem="631-Mn-5yR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="kXP-M1-oMg"/>
                             <constraint firstItem="HkM-FC-MRU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sPZ-sP-bYE"/>
-                            <constraint firstItem="F05-yR-fuZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="saS-u6-NIT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="631-Mn-5yR" secondAttribute="trailing" id="uMK-Kv-L13"/>
                         </constraints>
                     </view>
@@ -327,6 +329,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EEr-m2-XSj"/>
+        <segue reference="h3u-N1-XRE"/>
     </inferredMetricsTieBreakers>
 </document>

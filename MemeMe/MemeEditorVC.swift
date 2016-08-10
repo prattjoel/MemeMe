@@ -31,6 +31,7 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     // Prompt to create meme
     @IBOutlet weak var selectImagePrompt: UILabel!
     
+    var meme = Meme()
     
     // Sets attributes for text fields
     var memeTextAttributes = [
@@ -40,10 +41,38 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         NSStrokeWidthAttributeName : -3.0
     ]
     
+    // MARK: - View life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        textSetup()
+        
+        selectImagePrompt.text = "Select an Image to Create a Meme"
+        selectImagePrompt.textColor = UIColor.blackColor()
+        
+        
+    }
+    
+    // Disables camera button, share button, and cancel button.  Also hides prompt to create meme
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        subscribeToKeyboardNotifications()
+        
+        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        shareButton.enabled = imagePickerView.image != nil
+        cancelButton.enabled = true
+        selectImagePrompt.hidden = imagePickerView.image != nil
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+        
+    }
+    
     // MARK: - TextField Setup
     
     func prepareTextField (textField: UITextField, defaultText: String){
-        super.viewDidLoad()
         
         textField.delegate = self
         textField.defaultTextAttributes = memeTextAttributes
@@ -83,54 +112,32 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         
         let alertController = UIAlertController(title: "Pick Your Meme Font", message: "", preferredStyle: .ActionSheet)
         
-        let defaultFontAction = UIAlertAction(title: "Impact (Default)", style: .Default, handler: {
-            action in
+        func alertControllerActionSetup(title: String, style: UIAlertActionStyle, fontName: String?) {
             
-            changeFontName("Impact")
             
-            }
-        )
-        
-        alertController.addAction(defaultFontAction)
-        
-        let timesNewRomanAction = UIAlertAction(title: "Times New Roman", style: .Default, handler: {
-            action in
+            let fontAction = UIAlertAction(title: title, style: style, handler: {
+                action in
+                
+                if let name = fontName {
+                    changeFontName(name)
+                }
+                else {
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+                }
+            )
             
-            changeFontName("Times New Roman")
-            }
-        )
+            alertController.addAction(fontAction)
+        }
         
-        alertController.addAction(timesNewRomanAction)
-        
-        let helveticaAction = UIAlertAction(title: "Helvetica Neue", style: .Default, handler: {
-            action in
-            
-            changeFontName("Helvetica Neue")
-            }
-        )
-        
-        alertController.addAction(helveticaAction)
-        
-        
-        let markerFeltAction = UIAlertAction(title: "Marker Felt", style: .Default, handler: {
-            action in
-            
-            changeFontName("Marker Felt")
-            }
-        )
-        
-        alertController.addAction(markerFeltAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
-            action in
-            
-            self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        )
-        
-        alertController.addAction(cancelAction)
+        alertControllerActionSetup("Impact (Default)", style: .Default, fontName: "Impact")
+        alertControllerActionSetup("Times New Roman", style: .Default, fontName: "Times New Roman")
+        alertControllerActionSetup("Helvetica Neue", style: .Default, fontName: "Helvetica Neue")
+        alertControllerActionSetup("Marker Felt", style: .Default, fontName: "Marker Felt")
+        alertControllerActionSetup("Cancel", style: .Cancel, fontName: nil)
         
         presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     // MARK: - Keybord Setup/Functionality
@@ -197,22 +204,23 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         }
     }
     
-    // Allows user to choose image from album
-    @IBAction func pickAnImage(sender: AnyObject) {
-        
+    func chooseImageFromSourceType(source: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePicker.sourceType = source
         presentViewController(imagePicker, animated: true, completion: nil)
+
+    }
+    
+    // Allows user to choose image from album
+    @IBAction func pickAnImage(sender: AnyObject) {
+        chooseImageFromSourceType(UIImagePickerControllerSourceType.PhotoLibrary)
     }
     
     
     // Allows user to choose image using camera
     @IBAction func pickImageFromCamera(sender: AnyObject) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.Camera
-        presentViewController(imagePicker, animated: true, completion: nil)
+        chooseImageFromSourceType(UIImagePickerControllerSourceType.Camera)
     }
     
     
@@ -266,38 +274,11 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     // Allows user to start over
     @IBAction func cancelMeme(sender: UIBarButtonItem) {
         
+        dismissViewControllerAnimated(true, completion: nil)
+        
         let sentMemesController = storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
-        
+    
         presentViewController(sentMemesController, animated: true, completion: nil)
-        
-    }
-    
-    // MARK: - View life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        textSetup()
-        
-        selectImagePrompt.text = "Select an Image to Create a Meme"
-        selectImagePrompt.textColor = UIColor.blackColor()
-        
-        
-    }
-    
-    // Disables camera button, share button, and cancel button.  Also hides prompt to create meme
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        subscribeToKeyboardNotifications()
-        
-        cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
-        shareButton.enabled = imagePickerView.image != nil
-        cancelButton.enabled = true
-        selectImagePrompt.hidden = imagePickerView.image != nil
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
         
     }
     
