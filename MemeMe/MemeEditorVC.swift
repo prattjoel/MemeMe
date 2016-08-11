@@ -31,7 +31,8 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     // Prompt to create meme
     @IBOutlet weak var selectImagePrompt: UILabel!
     
-    var meme = Meme()
+    var memeToEdit = Meme()
+    var memeDetailVC = MemeDetailViewController()
     
     // Sets attributes for text fields
     var memeTextAttributes = [
@@ -45,10 +46,20 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textSetup()
         
-        selectImagePrompt.text = "Select an Image to Create a Meme"
-        selectImagePrompt.textColor = UIColor.blackColor()
+        if memeToEdit.memeTopText != nil && memeToEdit.memeBottomText != nil {
+            imagePickerView.image = memeToEdit.image
+            topText.text = memeToEdit.memeTopText
+            bottomText.text = memeToEdit.memeBottomText
+            textSetup()
+        }
+        else {
+            textSetup()
+            
+            selectImagePrompt.text = "Select an Image to Create a Meme"
+            selectImagePrompt.textColor = UIColor.blackColor()
+        }
+        
         
         
     }
@@ -209,7 +220,7 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imagePicker.delegate = self
         imagePicker.sourceType = source
         presentViewController(imagePicker, animated: true, completion: nil)
-
+        
     }
     
     // Allows user to choose image from album
@@ -234,7 +245,18 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        if memeToEdit.memeTopText == nil {
+            appDelegate.memes.append(meme)
+        }
+        else {
+            for (index, value) in appDelegate.memes.enumerate() {
+                if value.memeTopText == memeToEdit.memeTopText && value.memeBottomText == memeToEdit.memeBottomText {
+                    print(value.memedImage.traitCollection)
+                    appDelegate.memes[index] = meme
+                }
+            }
+            
+        }
     }
     
     // Creates a UIImage that combines the Image View and the Textfields
@@ -265,9 +287,13 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         activityViewController.completionWithItemsHandler = { (activty, completed, items, error) in
             if completed{
                 self.save(memeToShare)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                let sentMemesController = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
+                self.presentViewController(sentMemesController, animated: true, completion: nil)
+                print("view controller present method ran")
             }
+            
         }
+        
         
     }
     
@@ -275,10 +301,6 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBAction func cancelMeme(sender: UIBarButtonItem) {
         
         dismissViewControllerAnimated(true, completion: nil)
-        
-        let sentMemesController = storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
-    
-        presentViewController(sentMemesController, animated: true, completion: nil)
         
     }
     

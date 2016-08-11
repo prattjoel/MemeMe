@@ -112,7 +112,7 @@
         <!--Sent Memes-->
         <scene sceneID="uSa-5n-0FD">
             <objects>
-                <collectionViewController id="qXv-fm-6Ff" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="MemeCollectionViewController" id="qXv-fm-6Ff" customClass="MemeCollectionViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ChY-Qs-48f">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,6 +329,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="h3u-N1-XRE"/>
+        <segue reference="EEr-m2-XSj"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -52,9 +52,9 @@ class MemeDetailViewController: UIViewController {
                     self.deleteMeme()
                 }
                 else if title == "Cancel" {
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    alertController.dismissViewControllerAnimated(true, completion: nil)
                 }
-            }
+                }
             )
             alertController.addAction(deleteButtonAction)
         }
@@ -79,8 +79,6 @@ class MemeDetailViewController: UIViewController {
         
         print(memes.count)
         
-        
-        dismissViewControllerAnimated(true, completion: nil)
         let sentMemesVC = storyboard!.instantiateViewControllerWithIdentifier("MemeTableViewController") as! MemeTableViewController
         sentMemesVC.applicationDelegate.memes = memes
         navigationController?.pushViewController(sentMemesVC, animated: true)
@@ -89,8 +87,7 @@ class MemeDetailViewController: UIViewController {
     func editMeme(sender: UIButton) {
         
         let memeEditorVC = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorVC") as! MemeEditorVC
-        memeEditorVC.meme = meme
-        navigationController?.pushViewController(memeEditorVC, animated: true)
-        
+        memeEditorVC.memeToEdit = meme
+        presentViewController(memeEditorVC, animated: true, completion: nil)
     }
 }
