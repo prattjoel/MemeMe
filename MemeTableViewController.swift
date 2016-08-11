@@ -10,14 +10,21 @@ import UIKit
 
 class MemeTableViewController: UITableViewController {
     
+    @IBOutlet var editButton: UIBarButtonItem!
+
+    
     let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     
+    // MARK: View Life Cycle
     
-    @IBAction func deleteButton(sender: UIBarButtonItem) {
-        setEditing(true, animated: true)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
+        tableView.reloadData()
     }
-    // MARK: - TableView DataSource
+    
+
+    // MARK: - TableView DataSource Methods
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return applicationDelegate.memes.count
@@ -37,9 +44,11 @@ class MemeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let detailViewController = storyboard!.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         detailViewController.meme = applicationDelegate.memes[indexPath.row]
+        detailViewController.memeIndex = indexPath.row
         navigationController!.pushViewController(detailViewController, animated: true)
     }
 
+    // MARK: - Table Editing Methods
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
@@ -54,14 +63,18 @@ class MemeTableViewController: UITableViewController {
     
     }
     
-    
-    // MARK: View Life Cycle
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    @IBAction func deleteMeme(sender: UIBarButtonItem) {
+        if editing == false {
+            setEditing(true, animated: true)
+            editButton.title = "Done"
+        }
+        else {
+            setEditing(false, animated: true)
+            editButton.title = "Edit"
+        }
         
-        tableView.reloadData()
     }
+    
     
     
 }

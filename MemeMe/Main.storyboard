@@ -15,7 +15,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" textLabel="3sd-6L-sgV" rowHeight="50" style="IBUITableViewCellStyleDefault" id="ahw-d0-yhG" customClass="SentMemesTableViewCell" customModule="MemeMe" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" selectionStyle="default" indentationWidth="10" reuseIdentifier="MemeTableCell" textLabel="3sd-6L-sgV" rowHeight="50" style="IBUITableViewCellStyleDefault" id="ahw-d0-yhG">
                                 <rect key="frame" x="0.0" y="92" width="600" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ahw-d0-yhG" id="qhx-Xt-Mli">
@@ -40,9 +40,9 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Sent Memes" id="y9u-2K-Yav">
-                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="8ed-WH-ML4">
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="8ed-WH-ML4">
                             <connections>
-                                <action selector="deleteButton:" destination="RZD-gy-yMB" id="CA4-Ft-0pX"/>
+                                <action selector="deleteMeme:" destination="RZD-gy-yMB" id="329-hM-TFG"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="HOj-Eu-h48">
@@ -52,6 +52,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="editButton" destination="8ed-WH-ML4" id="gp3-Jc-3S7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tk0-j4-uvQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -329,6 +332,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EEr-m2-XSj"/>
+        <segue reference="h3u-N1-XRE"/>
     </inferredMetricsTieBreakers>
 </document>

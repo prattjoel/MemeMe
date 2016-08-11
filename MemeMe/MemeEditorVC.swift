@@ -10,6 +10,7 @@ import UIKit
 
 class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    // MARK: - Outlets
     
     // Buttons to select image
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -31,8 +32,10 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     // Prompt to create meme
     @IBOutlet weak var selectImagePrompt: UILabel!
     
+    // Mark: - Variable/Constants
     var memeToEdit = Meme()
     var memeDetailVC = MemeDetailViewController()
+    var memeIndex: Int!
     
     // Sets attributes for text fields
     var memeTextAttributes = [
@@ -59,8 +62,6 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             selectImagePrompt.text = "Select an Image to Create a Meme"
             selectImagePrompt.textColor = UIColor.blackColor()
         }
-        
-        
         
     }
     
@@ -95,7 +96,6 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         
     }
     
-    
     // Sets up textfields
     func textSetup (){
         prepareTextField(topText, defaultText: "TOP")
@@ -124,7 +124,6 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         let alertController = UIAlertController(title: "Pick Your Meme Font", message: "", preferredStyle: .ActionSheet)
         
         func alertControllerActionSetup(title: String, style: UIAlertActionStyle, fontName: String?) {
-            
             
             let fontAction = UIAlertAction(title: title, style: style, handler: {
                 action in
@@ -249,12 +248,7 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             appDelegate.memes.append(meme)
         }
         else {
-            for (index, value) in appDelegate.memes.enumerate() {
-                if value.memeTopText == memeToEdit.memeTopText && value.memeBottomText == memeToEdit.memeBottomText {
-                    print(value.memedImage.traitCollection)
-                    appDelegate.memes[index] = meme
-                }
-            }
+            appDelegate.memes[memeIndex] = meme
             
         }
     }
@@ -289,12 +283,8 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                 self.save(memeToShare)
                 let sentMemesController = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
                 self.presentViewController(sentMemesController, animated: true, completion: nil)
-                print("view controller present method ran")
             }
-            
         }
-        
-        
     }
     
     // Allows user to start over
