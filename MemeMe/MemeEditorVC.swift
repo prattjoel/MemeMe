@@ -33,9 +33,9 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     @IBOutlet weak var selectImagePrompt: UILabel!
     
     // Mark: - Variable/Constants
-    var memeToEdit = Meme()
+    var memeToEdit: Meme?
     var memeDetailVC = MemeDetailViewController()
-    var memeIndex: Int!
+    var memeIndex: Int?
     
     // Sets attributes for text fields
     var memeTextAttributes = [
@@ -50,10 +50,10 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if memeToEdit.memeTopText != nil && memeToEdit.memeBottomText != nil {
-            imagePickerView.image = memeToEdit.image
-            topText.text = memeToEdit.memeTopText
-            bottomText.text = memeToEdit.memeBottomText
+        if let editingMeme = memeToEdit {
+            imagePickerView.image = editingMeme.image
+            topText.text = editingMeme.memeTopText
+            bottomText.text = editingMeme.memeBottomText
             textSetup()
         }
         else {
@@ -62,7 +62,6 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             selectImagePrompt.text = "Select an Image to Create a Meme"
             selectImagePrompt.textColor = UIColor.blackColor()
         }
-        
     }
     
     // Disables camera button, share button, and cancel button.  Also hides prompt to create meme
@@ -244,12 +243,13 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        if memeToEdit.memeTopText == nil {
+        if memeToEdit == nil {
             appDelegate.memes.append(meme)
-        }
-        else {
-            appDelegate.memes[memeIndex] = meme
             
+        } else {
+            if let index = memeIndex {
+                appDelegate.memes[index] = meme
+            }
         }
     }
     
@@ -281,8 +281,8 @@ class MemeEditorVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         activityViewController.completionWithItemsHandler = { (activty, completed, items, error) in
             if completed{
                 self.save(memeToShare)
-                let sentMemesController = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController")
-                self.presentViewController(sentMemesController, animated: true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
+                
             }
         }
     }

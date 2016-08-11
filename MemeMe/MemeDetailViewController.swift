@@ -16,7 +16,7 @@ class MemeDetailViewController: UIViewController {
     let applicationDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     
     var meme = Meme()
-    var memeIndex: Int!
+    var memeIndex: Int?
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -60,7 +60,9 @@ class MemeDetailViewController: UIViewController {
     
     func removeMeme() {
         var memes = applicationDelegate.memes
-        memes.removeAtIndex(memeIndex)
+        if let index = memeIndex {
+            memes.removeAtIndex(index)
+        }
         
         let sentMemesVC = storyboard!.instantiateViewControllerWithIdentifier("MemeTableViewController") as! MemeTableViewController
         sentMemesVC.applicationDelegate.memes = memes
@@ -69,10 +71,11 @@ class MemeDetailViewController: UIViewController {
     
     // Presents Meme Editor
     func editMeme(sender: UIButton) {
-        
         let memeEditorVC = storyboard!.instantiateViewControllerWithIdentifier("MemeEditorVC") as! MemeEditorVC
         memeEditorVC.memeToEdit = meme
         memeEditorVC.memeIndex = memeIndex
+        
         presentViewController(memeEditorVC, animated: true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
     }
 }
